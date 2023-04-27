@@ -1,0 +1,10 @@
+{
+  "cSpell.words": [
+    "BICONDITIONAL",
+    "biconditionals",
+    "linspace",
+    "ndarray",
+    "prettytable"
+  ],
+  "python.analysis.typeCheckingMode": "basic"
+}

@@ -1,0 +1,11 @@
+(p ∧ ¬q) ∨ p
+(¬p ∨ q) ∧ ¬p
+¬(p ∧ q) ≡ ¬p ∨ ¬q
+¬(p ∨ q) ≡ ¬p ∧ ¬q
+q, p ↔ q,⊢ p
+p, q → p,⊢ q
+¬(¬p ∧ q) ∧ (p ∨ q) ≡ p
+(p ∨ ¬q) ∧ ((¬p ∨ ¬q) ∧ (¬p ∨ ¬q) ∧ ¬p ∨ ¬q) ≡ ¬q
+p ∨ q, ¬q, ⊢ p
+p → q, q → r,⊢ p → r
+p ∨ q, p → r, q → r,⊢ r
