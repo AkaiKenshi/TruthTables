@@ -38,8 +38,13 @@ ignore_keys = []
 
 def assign_key(key: str, prepositions: str):
     # creates and manages a new key
-    new_key = f"[U{len(keys)}]"
-    keys[new_key] = key
+    new_key = ""
+    if key in keys.values():
+        index = list(keys.values()).index(key)
+        new_key = list(keys.keys())[index]
+    else: 
+        new_key = f"[U{len(keys)}]"
+        keys[new_key] = key
     prepositions = prepositions.replace(key, new_key)
 
     return prepositions, new_key
@@ -51,14 +56,6 @@ def reverse_key(val_to_replace: str):
         val = keys[key]
         val_to_replace = val_to_replace.replace(key, val)
     return val_to_replace
-
-
-def find_if_value_exists(value):
-    if value in keys.values():
-        index = list(keys.values()).index(value)
-        return list(keys.keys())[index], True
-    return value, False
-
 
 def generate_truth_table(keys: list):
     truth_dict = {}  # creates a dictionary for the truth table
@@ -94,11 +91,6 @@ def find_negations(prepositions: str):
     matches = list(set(re.findall(NOT_PATTERN, prepositions)))
 
     for match in matches:
-        new_value, found_new_value = find_if_value_exists(match[0])
-        if found_new_value:
-            prepositions = prepositions.replace(match[0], new_value)
-            continue
-
         prepositions, new_key = assign_key(match[0], prepositions)
         table[new_key] = ~table[match[1]]
     return prepositions
@@ -108,11 +100,6 @@ def find_compound_propositions(pattern: str, prepositions: str, proposition_hand
     matches = list(set(re.findall(pattern, prepositions)))  # find the pattern
 
     for match in matches:
-        new_value, found_new_value = find_if_value_exists(match[0])
-        if found_new_value:
-            prepositions = prepositions.replace(match[0], new_value)
-            continue
-
         prepositions, new_key = assign_key(match[0], prepositions)
         table[new_key] = proposition_handler(table[match[1]], table[match[2]])
 
@@ -190,7 +177,10 @@ prepositions = work_with_operators(prepositions)
 
 print_table = PrettyTable()
 
-for key, val in table.items():
+
+sorted_table = dict(sorted(table.items(), key=lambda x: len(reverse_key(str(x[0])))))
+
+for key,val in sorted_table.items():
     if (key not in ignore_keys):
         print_table.add_column(reverse_key(key), val)
 
