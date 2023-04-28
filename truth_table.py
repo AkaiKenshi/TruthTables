@@ -16,6 +16,12 @@ ARGUMENT_PATTERN = fr"⊢.?({KEY_PATTERN})"
 ARGUMENT_CONDITION_PATTERN = fr"({KEY_PATTERN}),"
 PARENTHESES_PATTERN = fr"(\(((?:[^()])*)\))"
 
+#comment the previous block and Uncomment the following one if you want to use:
+#   !  instead of ¬
+#   &  instead of ∧
+#   |  instead of ∨
+#   -> instead of →
+#   <> instead of ↔
 
 #ACTIONS_PATTERN = r"[\!\|&]|<>|->"
 #LETTER_PATTERN = r"([a-zA-Z])"
